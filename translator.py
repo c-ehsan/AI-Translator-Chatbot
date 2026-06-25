@@ -23,7 +23,6 @@ def translate_auto(text:str):
     tatget_lang=get Destination  language
     """
     lang=detect_language(text)
-    print(lang)
     if lang=="en":
         source_lang="eng_Latn"
         target_lang="pes_Arab"
@@ -42,7 +41,7 @@ def translate_auto(text:str):
     inputs=tokenizer(text,return_tensors="pt")
 
     outputs=model.generate(**inputs,
-                max_new_tokens=100,
+                max_new_tokens=512,
                 num_beams=4,
                 forced_bos_token_id=tokenizer.convert_tokens_to_ids(target_lang)) # for translation num_beams its better
     
@@ -52,7 +51,11 @@ def translate_auto(text:str):
 
     return translation
 
+text="""به نام خدای مهربان که هر روز را با نور امید آغاز می‌کند.
+زندگی همچون دفتری ست که ورق‌هایش را خودمان با قلم انتخاب می‌نویسیم.
+گاه سطرهایش پر از لبخند و گاه آکنده از آموزه‌های تلخ است.
+اما زیبایی در این جریان است که ما را به سوی فردایی روشن‌تر هدایت می‌کند.
+پس بیایید قدر این لحظه‌های ناب را بدانیم و شکرگزار باشیم.
+"""
 
-
-res=translate_auto("سلام چه خبز؟")
-print(f"translate_result is :{res}")
+print(len(tokenizer(text)["input_ids"]))
