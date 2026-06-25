@@ -8,19 +8,36 @@ from download_model import load_model_tokenizer
 #load model 
 tokenizer,model=load_model_tokenizer("./models")
 
+def detect_language(text):
+    """This function automatically detects the language and makes our work easier for translation."""
+    for char in text:
+        if "\u0600"<=char<="\u06FF": # this range of chars for persian unicode chars
+            return "fa"
+    return "en"
 
-
-
-def translate_fa_to_en(text,source_lang,target_lang):
+def translate_auto(text:str):
     """Translation Persian text to English
     ARGS:
     text=get a text(str) and translate it.
     source_lang=get Origin language
     tatget_lang=get Destination  language
     """
+    lang=detect_language(text)
+    print(lang)
+    if lang=="en":
+        source_lang="eng_Latn"
+        target_lang="pes_Arab"
 
-    source_lang=source_lang
-    target_lang=target_lang
+    elif lang=="fa":
+        source_lang="pes_Arab"
+        target_lang="eng_Latn"
+
+    else:
+        return "Language not supported"
+    
+    tokenizer.src_lang=source_lang
+
+
 
     inputs=tokenizer(text,return_tensors="pt")
 
@@ -37,5 +54,5 @@ def translate_fa_to_en(text,source_lang,target_lang):
 
 
 
-res=translate_fa_to_en("hello my freind","eng_Latn","pes_Arab")
+res=translate_auto("سلام چه خبز؟")
 print(f"translate_result is :{res}")
