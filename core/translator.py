@@ -1,6 +1,6 @@
 from transformers import AutoModelForSeq2SeqLM , AutoTokenizer
 from transformers import GenerationConfig
-from download_model import load_model_tokenizer
+from core.download_model import load_model_tokenizer
 # load model translation persian to english 
 
 

@@ -1,4 +1,4 @@
-from translator import translate_auto 
+from core.translator import translate_auto 
 from time import sleep
 
 def type_words(text,delay=0.2):

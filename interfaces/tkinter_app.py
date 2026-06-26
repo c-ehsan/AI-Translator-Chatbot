@@ -1,6 +1,6 @@
 import tkinter as tk 
 from tkinter import messagebox
-from translator import translate_auto
+from core.translator import translate_auto
 
 class Logic:       
     def translate_text(self,text):
