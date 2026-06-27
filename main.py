@@ -1,4 +1,9 @@
-from gui.tkinter_app import UI 
-
+from interfaces.tkinter_app import UI 
+from api.fastapi_app import app 
+from api.flask_app import API
+import uvicorn
 if __name__=="__main__":
-    UI()
+    api=API()
+    api.relatives_routes()
+    api.run_app()
+
